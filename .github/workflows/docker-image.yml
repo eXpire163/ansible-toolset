@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: login
-      run: echo ${{ secrets.DOCKERHUB }} | docker login -u expire163
+      run: echo ${{ secrets.DOCKERHUB }} | docker login -u expire163 --password-stdin
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag expire163/ansible-toolset:latest
     - name: push
