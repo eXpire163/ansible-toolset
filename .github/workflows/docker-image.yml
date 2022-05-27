@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: login
+      run: echo ${{ secrets.DOCKERHUB }} | docker login -u expire163
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag expire163/ansible-toolset:latest
+    - name: push
+      run: docker push expire163/ansible-toolset:latest
+    
+
